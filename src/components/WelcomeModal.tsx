@@ -6,6 +6,14 @@ import CelebrationIcon from '@mui/icons-material/Celebration';
 
 const WelcomeModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const [btnPos, setBtnPos] = useState({ x: 0, y: 0 });
+
+  const moveButton = () => {
+    // Generate random coordinates to dodge the cursor (X: -150 to 150, Y: -80 to 80)
+    const newX = Math.floor(Math.random() * 300) - 150;
+    const newY = Math.floor(Math.random() * 160) - 80;
+    setBtnPos({ x: newX, y: newY });
+  };
 
   // Add overflow hidden to body when modal is open to prevent scrolling
   useEffect(() => {
@@ -81,34 +89,64 @@ const WelcomeModal: React.FC = () => {
                 I'm Ankit, a Senior Full Stack Developer shaping the future of digital products. Ready to explore my journey?
               </Typography>
 
-              <Button
-                variant="outlined"
-                size="large"
-                onClick={handleClose}
-                endIcon={<CelebrationIcon />}
-                sx={{
-                  px: 4,
-                  py: 1.5,
-                  fontSize: '1.2rem',
-                  fontWeight: 'bold',
-                  borderColor: '#00f2fe',
-                  color: '#00f2fe',
-                  borderWidth: 2,
-                  borderRadius: '24px', // This creates the rounded-lg effect
-                  textTransform: 'none',
-                  transition: 'all 0.3s ease',
-                  '&:hover': {
+              <Box sx={{ display: 'flex', gap: { xs: 2, md: 3 }, justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', mt: 2 }}>
+                <Button
+                  variant="outlined"
+                  size="large"
+                  onClick={handleClose}
+                  endIcon={<CelebrationIcon />}
+                  sx={{
+                    px: 4,
+                    py: 1.5,
+                    fontSize: '1.2rem',
+                    fontWeight: 'bold',
+                    borderColor: '#00f2fe',
+                    color: '#00f2fe',
                     borderWidth: 2,
-                    borderColor: 'transparent',
-                    background: 'linear-gradient(90deg, #00f2fe 0%, #4facfe 100%)',
-                    color: '#000',
-                    transform: 'translateY(-3px)',
-                    boxShadow: '0 12px 30px rgba(0, 242, 254, 0.6)',
-                  }
-                }}
-              >
-                Yes, I am impressed with your profile
-              </Button>
+                    borderRadius: '24px', // This creates the rounded-lg effect
+                    textTransform: 'none',
+                    transition: 'all 0.3s ease',
+                    '&:hover': {
+                      borderWidth: 2,
+                      borderColor: 'transparent',
+                      background: 'linear-gradient(90deg, #00f2fe 0%, #4facfe 100%)',
+                      color: '#000',
+                      transform: 'translateY(-3px)',
+                      boxShadow: '0 12px 30px rgba(0, 242, 254, 0.6)',
+                    }
+                  }}
+                >
+                  Yes, I am impressed with your profile
+                </Button>
+
+                <motion.div
+                  animate={btnPos}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  onHoverStart={moveButton}
+                  onClick={moveButton}
+                  style={{ zIndex: 10 }}
+                >
+                  <Button
+                    variant="outlined"
+                    size="large"
+                    color="error"
+                    sx={{
+                      px: 4,
+                      py: 1.5,
+                      fontSize: '1.1rem',
+                      fontWeight: 'bold',
+                      borderRadius: '24px',
+                      borderWidth: 2,
+                      textTransform: 'none',
+                      '&:hover': {
+                        borderWidth: 2,
+                      }
+                    }}
+                  >
+                    Not Interested
+                  </Button>
+                </motion.div>
+              </Box>
             </Box>
           </motion.div>
         </Backdrop>
