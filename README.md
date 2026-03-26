@@ -1,73 +1,23 @@
-# React + TypeScript + Vite
+# 🚀 Ankit Meena - Senior Full Stack Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Portfolio Views](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fankitm10039.github.io%2Fportfolio-website&count_bg=%2300F2FE&title_bg=%231A1A24&icon=&icon_color=%23E7E7E7&title=Portfolio+Views&edge_flat=true)](https://ankitm10039.github.io/portfolio-website/)
 
-Currently, two official plugins are available:
+Welcome to the source code of my personal portfolio website. This project is a highly interactive, responsive, and beautifully animated React application built to showcase my professional journey, full-stack projects, and technical skills.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌐 Live URL
+**[View Live Portfolio Here](https://ankitm10039.github.io/portfolio-website/)**
 
-## React Compiler
+## 🛠️ Tech Stack
+- **Framework:** React.js + Vite
+- **Styling:** Material UI (MUI v5) + Custom Vanilla CSS (Glassmorphism)
+- **Animations:** Framer Motion + tsParticles + React Simple Typewriter
+- **Deployment:** GitHub Pages
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Key Features
+- **3D Animated Welcome Modal:** Custom user-evasion "Not Interested" button interactions and fluid typewriting animations.
+- **Dynamic Particles Background:** High-performance glowing interactive background.
+- **Responsive Layout:** Perfectly scales from desktop to mobile screens natively.
+- **Modern Glassmorphism Design:** A stunning, premium aesthetic wrapping full-stack tech stacks and chronological experience mapping.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+*If you like this repository or find the code helpful, feel free to leave a ⭐!*
