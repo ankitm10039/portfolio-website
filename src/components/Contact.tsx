@@ -28,7 +28,7 @@ const Contact: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.6 }}
         >
           <Box className="glass-box" sx={{ p: { xs: 4, md: 8 }, textAlign: 'center' }}>
@@ -44,7 +44,14 @@ const Contact: React.FC = () => {
                 <IconButton sx={{ backgroundColor: 'rgba(0, 242, 254, 0.1)', color: '#00f2fe', '&:hover': { backgroundColor: 'rgba(0, 242, 254, 0.2)' } }}>
                   <EmailIcon />
                 </IconButton>
-                <Typography variant="body2" sx={{ color: '#fff' }}>{resumeData.personalInfo.email}</Typography>
+                <Typography 
+                  component="a" 
+                  href={`mailto:${resumeData.personalInfo.email}`} 
+                  variant="body2" 
+                  sx={{ color: '#fff', textDecoration: 'none', transition: 'color 0.3s', '&:hover': { color: '#00f2fe' } }}
+                >
+                  {resumeData.personalInfo.email}
+                </Typography>
               </Box>
               
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1.5 }}>
@@ -73,6 +80,7 @@ const Contact: React.FC = () => {
                 <WhatsAppIcon />
               </IconButton>
             </Box>
+
 
             <Typography variant="body2" sx={{ color: 'text.secondary', opacity: 0.6, mt: 4 }}>
               © {new Date().getFullYear()} {resumeData.personalInfo.name}. All rights reserved.

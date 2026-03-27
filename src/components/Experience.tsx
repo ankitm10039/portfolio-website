@@ -14,7 +14,7 @@ const Experience: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.6 }}
         >
           <Typography variant="h3" sx={{ mb: 6, textAlign: 'center' }}>
@@ -57,7 +57,7 @@ const Experience: React.FC = () => {
                   component={motion.div}
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
-                  viewport={{ once: true, amount: 0.5 }}
+                  viewport={{ once: false, amount: 0.5 }}
                   transition={{ duration: 0.4, delay: 0.2 }}
                   sx={{ 
                     position: 'absolute', 
@@ -74,7 +74,7 @@ const Experience: React.FC = () => {
                 <motion.div
                   initial={{ opacity: 0, x: isEven ? -50 : 50, y: 20 }}
                   whileInView={{ opacity: 1, x: 0, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
+                  viewport={{ once: false, amount: 0.2 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
                   style={{ width: '100%', maxWidth: '600px' }}
                 >

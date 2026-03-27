@@ -1,7 +1,7 @@
 export const resumeData = {
   personalInfo: {
     name: "Ankit Meena",
-    email: "ankitmeena.dev@gmail.com",
+    email: "ankitm.uidev@gmail.com",
     phone: "(+91) 7674988775",
     location: "Navi Mumbai, Maharashtra",
     role: "Senior Analyst & Full Stack Developer",
