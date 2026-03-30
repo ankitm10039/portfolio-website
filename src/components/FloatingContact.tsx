@@ -65,7 +65,7 @@ const FloatingContact: React.FC = () => {
         }}
       >
         <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#fff' }}>
-          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Let's Chat!</Typography>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Let's Connect!</Typography>
           <IconButton onClick={handleClose} sx={{ color: 'rgba(255,255,255,0.7)', '&:hover': { color: '#00f2fe' } }}>
             <CloseIcon />
           </IconButton>
