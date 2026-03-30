@@ -6,14 +6,7 @@ import { Typewriter } from "react-simple-typewriter";
 
 const WelcomeModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(true);
-  const [btnPos, setBtnPos] = useState({ x: 0, y: 0 });
 
-  const moveButton = () => {
-    // Generate random coordinates to dodge the cursor (X: -150 to 150, Y: -80 to 80)
-    const newX = Math.floor(Math.random() * 300) - 150;
-    const newY = Math.floor(Math.random() * 160) - 80;
-    setBtnPos({ x: newX, y: newY });
-  };
 
   // Add overflow hidden to body when modal is open to prevent scrolling
   useEffect(() => {
