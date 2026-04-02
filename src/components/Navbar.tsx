@@ -36,9 +36,9 @@ const Navbar: React.FC = () => {
       position="fixed" 
       elevation={scrolled ? 4 : 0}
       sx={{
-        background: scrolled ? 'rgba(5, 5, 5, 0.8)' : 'transparent',
+        background: scrolled ? 'rgba(255, 255, 255, 0.8)' : 'transparent',
         backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(255, 255, 255, 0.05)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(30, 64, 175, 0.1)' : 'none',
         transition: 'all 0.3s ease-in-out',
         padding: '0.5rem 0'
       }}
@@ -51,7 +51,7 @@ const Navbar: React.FC = () => {
           className="gradient-text"
           onClick={() => scrollToSection('home')}
         >
-          Ankit<span style={{ color: '#fff' }}>.dev</span>
+          Ankit<span style={{ color: scrolled ? 'inherit' : 'primary.main' }}>.dev</span>
         </Typography>
 
         {!isMobile ? (
@@ -60,11 +60,11 @@ const Navbar: React.FC = () => {
               <Button 
                 key={item} 
                 sx={{ 
-                  color: '#fff', 
+                  color: scrolled ? 'text.primary' : 'primary.main', 
                   fontSize: '1rem',
                   fontWeight: 500,
                   position: 'relative',
-                  '&:hover': { background: 'transparent', color: '#00f2fe' },
+                  '&:hover': { background: 'transparent', color: 'secondary.main' },
                   boxShadow: 'none'
                 }}
                 onClick={() => scrollToSection(item)}
@@ -82,12 +82,12 @@ const Navbar: React.FC = () => {
               startIcon={<CloudDownloadIcon />}
               sx={{ 
                 ml: 2,
-                color: '#00f2fe', 
-                borderColor: 'rgba(0, 242, 254, 0.5)',
+                color: 'primary.main', 
+                borderColor: 'rgba(30, 64, 175, 0.5)',
                 borderRadius: 2,
                 '&:hover': { 
-                  borderColor: '#00f2fe', 
-                  background: 'rgba(0,242,254,0.1)' 
+                  borderColor: 'primary.main', 
+                  background: 'rgba(30,64,175,0.05)' 
                 }
               }}
             >
@@ -95,7 +95,7 @@ const Navbar: React.FC = () => {
             </Button>
           </Box>
         ) : (
-          <IconButton sx={{ color: '#fff' }}>
+          <IconButton sx={{ color: scrolled ? 'text.primary' : 'primary.main' }}>
             <MenuIcon />
           </IconButton>
         )}

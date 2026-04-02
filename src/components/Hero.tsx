@@ -48,9 +48,9 @@ const Hero: React.FC = () => {
             },
           },
           particles: {
-            color: { value: "#00f2fe" },
+            color: { value: "#1e40af" },
             links: {
-              color: "#4facfe",
+              color: "#3b82f6",
               distance: 150,
               enable: true,
               opacity: 0.2,
@@ -197,8 +197,8 @@ const Hero: React.FC = () => {
                   px: 3,
                   py: 1.5,
                   fontSize: "1.1rem",
-                  color: "#00f2fe",
-                  "&:hover": { backgroundColor: "rgba(0, 242, 254, 0.1)" },
+                  color: "primary.main",
+                  "&:hover": { backgroundColor: "rgba(30, 64, 175, 0.05)" },
                 }}
               >
                 Resume
@@ -218,7 +218,7 @@ const Hero: React.FC = () => {
                   rel="noopener noreferrer"
                   sx={{
                     color: "text.secondary",
-                    "&:hover": { color: "#00f2fe" },
+                    "&:hover": { color: "primary.main" },
                   }}
                 >
                   <LinkedInIcon fontSize="large" />
@@ -266,8 +266,8 @@ const Hero: React.FC = () => {
                   height: { xs: 200, sm: 250, md: 350 },
                   borderRadius: "50%",
                   objectFit: "cover",
-                  border: "4px solid rgba(0, 242, 254, 0.5)",
-                  boxShadow: "0 0 40px rgba(0, 242, 254, 0.4)",
+                  border: "4px solid rgba(30, 64, 175, 0.3)",
+                  boxShadow: "0 0 40px rgba(30, 64, 175, 0.15)",
                   display: "block",
                 }}
               />

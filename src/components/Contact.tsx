@@ -20,7 +20,7 @@ const Contact: React.FC = () => {
           transform: 'translateX(-50%)', 
           width: '100vw', 
           height: '200px', 
-          background: 'radial-gradient(ellipse at center, rgba(0,242,254,0.1) 0%, rgba(5,5,5,0) 70%)',
+          background: 'radial-gradient(ellipse at center, rgba(30,64,175,0.05) 0%, rgba(255,255,255,0) 70%)',
           pointerEvents: 'none'
         }} 
       />
@@ -41,39 +41,39 @@ const Contact: React.FC = () => {
 
             <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'center', gap: 4, mb: 4 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1.5 }}>
-                <IconButton sx={{ backgroundColor: 'rgba(0, 242, 254, 0.1)', color: '#00f2fe', '&:hover': { backgroundColor: 'rgba(0, 242, 254, 0.2)' } }}>
+                <IconButton sx={{ backgroundColor: 'rgba(59, 130, 246, 0.1)', color: 'primary.main', '&:hover': { backgroundColor: 'rgba(59, 130, 246, 0.2)' } }}>
                   <EmailIcon />
                 </IconButton>
                 <Typography 
                   component="a" 
                   href={`mailto:${resumeData.personalInfo.email}`} 
                   variant="body2" 
-                  sx={{ color: '#fff', textDecoration: 'none', transition: 'color 0.3s', '&:hover': { color: '#00f2fe' } }}
+                  sx={{ color: 'text.primary', textDecoration: 'none', transition: 'color 0.3s', '&:hover': { color: 'secondary.main' } }}
                 >
                   {resumeData.personalInfo.email}
                 </Typography>
               </Box>
               
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1.5 }}>
-                <IconButton sx={{ backgroundColor: 'rgba(0, 242, 254, 0.1)', color: '#00f2fe', '&:hover': { backgroundColor: 'rgba(0, 242, 254, 0.2)' } }}>
+                <IconButton sx={{ backgroundColor: 'rgba(59, 130, 246, 0.1)', color: 'primary.main', '&:hover': { backgroundColor: 'rgba(59, 130, 246, 0.2)' } }}>
                   <PhoneIcon />
                 </IconButton>
-                <Typography variant="body2" sx={{ color: '#fff' }}>{resumeData.personalInfo.phone}</Typography>
+                <Typography variant="body2" sx={{ color: 'text.primary' }}>{resumeData.personalInfo.phone}</Typography>
               </Box>
 
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1.5 }}>
-                <IconButton sx={{ backgroundColor: 'rgba(0, 242, 254, 0.1)', color: '#00f2fe', '&:hover': { backgroundColor: 'rgba(0, 242, 254, 0.2)' } }}>
+                <IconButton sx={{ backgroundColor: 'rgba(59, 130, 246, 0.1)', color: 'primary.main', '&:hover': { backgroundColor: 'rgba(59, 130, 246, 0.2)' } }}>
                   <LocationOnIcon />
                 </IconButton>
-                <Typography variant="body2" sx={{ color: '#fff' }}>{resumeData.personalInfo.location}</Typography>
+                <Typography variant="body2" sx={{ color: 'text.primary' }}>{resumeData.personalInfo.location}</Typography>
               </Box>
             </Box>
 
             <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, mb: 6 }}>
-              <IconButton component="a" href={resumeData.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" sx={{ backgroundColor: 'rgba(0, 242, 254, 0.1)', color: '#00f2fe', '&:hover': { backgroundColor: 'rgba(0, 242, 254, 0.2)', transform: 'translateY(-3px)' }, transition: 'all 0.3s ease' }}>
+              <IconButton component="a" href={resumeData.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" sx={{ backgroundColor: 'rgba(59, 130, 246, 0.1)', color: 'primary.main', '&:hover': { backgroundColor: 'rgba(59, 130, 246, 0.2)', transform: 'translateY(-3px)' }, transition: 'all 0.3s ease' }}>
                 <LinkedInIcon />
               </IconButton>
-              <IconButton component="a" href={resumeData.socialLinks.github} target="_blank" rel="noopener noreferrer" sx={{ backgroundColor: 'rgba(0, 242, 254, 0.1)', color: '#00f2fe', '&:hover': { backgroundColor: 'rgba(0, 242, 254, 0.2)', transform: 'translateY(-3px)' }, transition: 'all 0.3s ease' }}>
+              <IconButton component="a" href={resumeData.socialLinks.github} target="_blank" rel="noopener noreferrer" sx={{ backgroundColor: 'rgba(59, 130, 246, 0.1)', color: 'primary.main', '&:hover': { backgroundColor: 'rgba(59, 130, 246, 0.2)', transform: 'translateY(-3px)' }, transition: 'all 0.3s ease' }}>
                 <GitHubIcon />
               </IconButton>
               <IconButton component="a" href={resumeData.socialLinks.whatsapp} target="_blank" rel="noopener noreferrer" sx={{ backgroundColor: 'rgba(37, 211, 102, 0.1)', color: '#25D366', '&:hover': { backgroundColor: 'rgba(37, 211, 102, 0.2)', transform: 'translateY(-3px)' }, transition: 'all 0.3s ease' }}>

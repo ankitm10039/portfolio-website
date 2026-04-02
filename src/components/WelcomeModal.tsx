@@ -30,7 +30,7 @@ const WelcomeModal: React.FC = () => {
             zIndex: (theme) => theme.zIndex.drawer + 9999,
             // Deep blur effect on everything behind the modal
             backdropFilter: "blur(12px)",
-            backgroundColor: "rgba(5, 5, 10, 0.75)",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -58,8 +58,8 @@ const WelcomeModal: React.FC = () => {
                 flexDirection: "column",
                 alignItems: "center",
                 textAlign: "center",
-                border: "1px solid rgba(0, 242, 254, 0.3)",
-                boxShadow: "0 20px 80px rgba(0,242,254,0.15)",
+                border: "1px solid rgba(30, 64, 175, 0.15)",
+                boxShadow: "0 20px 80px rgba(0,0,0,0.08)",
                 borderRadius: 4,
               }}
             >
@@ -77,7 +77,7 @@ const WelcomeModal: React.FC = () => {
                   width: "120px",
                   height: "120px",
                   marginBottom: "1rem",
-                  filter: "drop-shadow(0 10px 20px rgba(0,242,254,0.3))",
+                  filter: "drop-shadow(0 10px 20px rgba(30, 64, 175, 0.2))",
                 }}
               />
 
@@ -85,7 +85,7 @@ const WelcomeModal: React.FC = () => {
                 variant="h3"
                 sx={{
                   fontWeight: 800,
-                  color: "#fff",
+                  color: "text.primary",
                   mb: 3,
                   minHeight: "80px",
                   display: "flex",
@@ -107,7 +107,7 @@ const WelcomeModal: React.FC = () => {
               <Typography
                 variant="body1"
                 sx={{
-                  color: "rgba(255,255,255,0.7)",
+                  color: "text.secondary",
                   mb: 5,
                   fontSize: "1.2rem",
                   lineHeight: 1.6,
@@ -137,8 +137,8 @@ const WelcomeModal: React.FC = () => {
                     py: 1.5,
                     fontSize: "1.2rem",
                     fontWeight: "bold",
-                    borderColor: "#00f2fe",
-                    color: "#00f2fe",
+                    borderColor: "primary.main",
+                    color: "primary.main",
                     borderWidth: 2,
                     borderRadius: "24px", // This creates the rounded-lg effect
                     textTransform: "none",
@@ -147,10 +147,10 @@ const WelcomeModal: React.FC = () => {
                       borderWidth: 2,
                       borderColor: "transparent",
                       background:
-                        "linear-gradient(90deg, #00f2fe 0%, #4facfe 100%)",
-                      color: "#000",
+                        "linear-gradient(90deg, #1e40af 0%, #3b82f6 100%)",
+                      color: "#fff",
                       transform: "translateY(-3px)",
-                      boxShadow: "0 12px 30px rgba(0, 242, 254, 0.6)",
+                      boxShadow: "0 12px 30px rgba(30, 64, 175, 0.4)",
                     },
                   }}
                 >

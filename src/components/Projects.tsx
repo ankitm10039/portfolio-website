@@ -5,7 +5,7 @@ import { resumeData } from '../data/resumeData';
 
 const Projects: React.FC = () => {
   return (
-    <Box id="projects" sx={{ py: 10, backgroundColor: 'rgba(10, 10, 15, 0.3)' }}>
+    <Box id="projects" sx={{ py: 10, backgroundColor: 'rgba(30, 64, 175, 0.03)' }}>
       <Container maxWidth="lg">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -38,13 +38,13 @@ const Projects: React.FC = () => {
                     flexDirection: 'column',
                     cursor: 'pointer',
                     '&:hover': {
-                      boxShadow: '0 8px 32px rgba(0, 242, 254, 0.15)'
+                      boxShadow: '0 8px 32px rgba(30, 64, 175, 0.1)'
                     }
                   }}
                 >
                   <CardContent sx={{ p: 4, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-                    <Box sx={{ mb: 2, width: 50, height: 5, background: 'linear-gradient(to right, #00f2fe, #4facfe)', borderRadius: 2 }} />
-                    <Typography variant="h5" sx={{ mb: 2, fontWeight: 700, color: '#fff' }}>
+                    <Box sx={{ mb: 2, width: 50, height: 5, background: 'linear-gradient(to right, #1e40af, #3b82f6)', borderRadius: 2 }} />
+                    <Typography variant="h5" sx={{ mb: 2, fontWeight: 700, color: 'text.primary' }}>
                       {project.name}
                     </Typography>
                     <Typography variant="body2" sx={{ color: 'text.secondary', lineHeight: 1.8, mb: 3, flexGrow: 1 }}>
@@ -60,9 +60,9 @@ const Projects: React.FC = () => {
                             label={tech} 
                             size="small" 
                             sx={{ 
-                              bgcolor: 'rgba(0, 242, 254, 0.05)', 
-                              color: '#4facfe', 
-                              border: '1px solid rgba(0, 242, 254, 0.2)',
+                              bgcolor: 'rgba(59, 130, 246, 0.05)', 
+                              color: 'primary.main', 
+                              border: '1px solid rgba(30, 64, 175, 0.1)',
                               fontSize: '0.75rem',
                               fontWeight: 600,
                               borderRadius: 1

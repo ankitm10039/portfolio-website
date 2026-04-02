@@ -98,13 +98,13 @@ const Skills: React.FC = () => {
             transition: "transform 0.3s ease",
             "&:hover": {
               transform: "translateY(-10px)",
-              boxShadow: "0 10px 30px rgba(0, 242, 254, 0.2)",
+              boxShadow: "0 10px 30px rgba(30, 64, 175, 0.1)",
             },
           }}
         >
           <Typography
             variant="h5"
-            sx={{ mb: 3, fontWeight: 700, color: "#00f2fe" }}
+            sx={{ mb: 3, fontWeight: 700, color: "primary.main" }}
           >
             {title}
           </Typography>
@@ -122,18 +122,19 @@ const Skills: React.FC = () => {
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  background: "rgba(255, 255, 255, 0.05)",
+                  background: "rgba(59, 130, 246, 0.05)",
                   px: 2,
                   py: 1,
                   borderRadius: 2,
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
-                  color: "#fff",
+                  border: "1px solid rgba(59, 130, 246, 0.1)",
+                  color: "text.primary",
                   fontSize: "0.95rem",
                   fontWeight: 500,
                   transition: "all 0.3s ease",
                   "&:hover": {
-                    background: "rgba(0, 242, 254, 0.2)",
-                    borderColor: "#00f2fe",
+                    background: "rgba(37, 99, 235, 0.1)",
+                    borderColor: "primary.main",
+                    color: "primary.main",
                   },
                 }}
               >

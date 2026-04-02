@@ -36,12 +36,12 @@ const FloatingContact: React.FC = () => {
           bottom: { xs: 24, md: 40 },
           right: { xs: 24, md: 40 },
           zIndex: 9999,
-          background: 'linear-gradient(135deg, #00f2fe 0%, #4facfe 100%)',
+          background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)',
           color: '#fff',
-          boxShadow: '0 8px 24px rgba(0, 242, 254, 0.4)',
+          boxShadow: '0 8px 24px rgba(30, 64, 175, 0.3)',
           '&:hover': {
             transform: 'scale(1.05)',
-            boxShadow: '0 12px 32px rgba(0, 242, 254, 0.6)',
+            boxShadow: '0 12px 32px rgba(30, 64, 175, 0.4)',
           },
           transition: 'all 0.3s ease',
         }}
@@ -55,18 +55,18 @@ const FloatingContact: React.FC = () => {
         PaperProps={{
           className: 'glass-box',
           sx: {
-            background: 'rgba(10, 10, 15, 0.95)',
+            background: 'rgba(255, 255, 255, 0.95)',
             backdropFilter: 'blur(20px)',
-            border: '1px solid rgba(0, 242, 254, 0.2)',
+            border: '1px solid rgba(30, 64, 175, 0.2)',
             borderRadius: 3,
             minWidth: { xs: '90vw', sm: '450px' },
-            boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.1)',
           }
         }}
       >
-        <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#fff' }}>
+        <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'text.primary' }}>
           <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Let's Connect!</Typography>
-          <IconButton onClick={handleClose} sx={{ color: 'rgba(255,255,255,0.7)', '&:hover': { color: '#00f2fe' } }}>
+          <IconButton onClick={handleClose} sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main' } }}>
             <CloseIcon />
           </IconButton>
         </DialogTitle>
@@ -83,13 +83,10 @@ const FloatingContact: React.FC = () => {
                 autoFocus
                 sx={{
                   '& .MuiOutlinedInput-root': {
-                    color: '#fff',
-                    '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.23)' },
-                    '&:hover fieldset': { borderColor: '#00f2fe' },
-                    '&.Mui-focused fieldset': { borderColor: '#00f2fe' },
+                    '&:hover fieldset': { borderColor: 'primary.main' },
+                    '&.Mui-focused fieldset': { borderColor: 'primary.main' },
                   },
-                  '& .MuiInputLabel-root': { color: 'rgba(255, 255, 255, 0.7)' },
-                  '& .MuiInputLabel-root.Mui-focused': { color: '#00f2fe' },
+                  '& .MuiInputLabel-root.Mui-focused': { color: 'primary.main' },
                 }}
               />
               <TextField 
@@ -100,13 +97,10 @@ const FloatingContact: React.FC = () => {
                 onChange={(e) => setSubject(e.target.value)}
                 sx={{
                   '& .MuiOutlinedInput-root': {
-                    color: '#fff',
-                    '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.23)' },
-                    '&:hover fieldset': { borderColor: '#00f2fe' },
-                    '&.Mui-focused fieldset': { borderColor: '#00f2fe' },
+                    '&:hover fieldset': { borderColor: 'primary.main' },
+                    '&.Mui-focused fieldset': { borderColor: 'primary.main' },
                   },
-                  '& .MuiInputLabel-root': { color: 'rgba(255, 255, 255, 0.7)' },
-                  '& .MuiInputLabel-root.Mui-focused': { color: '#00f2fe' },
+                  '& .MuiInputLabel-root.Mui-focused': { color: 'primary.main' },
                 }}
               />
               <TextField
@@ -119,13 +113,10 @@ const FloatingContact: React.FC = () => {
                 onChange={(e) => setDescription(e.target.value)}
                 sx={{
                   '& .MuiOutlinedInput-root': {
-                    color: '#fff',
-                    '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.23)' },
-                    '&:hover fieldset': { borderColor: '#00f2fe' },
-                    '&.Mui-focused fieldset': { borderColor: '#00f2fe' },
+                    '&:hover fieldset': { borderColor: 'primary.main' },
+                    '&.Mui-focused fieldset': { borderColor: 'primary.main' },
                   },
-                  '& .MuiInputLabel-root': { color: 'rgba(255, 255, 255, 0.7)' },
-                  '& .MuiInputLabel-root.Mui-focused': { color: '#00f2fe' },
+                  '& .MuiInputLabel-root.Mui-focused': { color: 'primary.main' },
                 }}
               />
             </Box>
@@ -139,14 +130,14 @@ const FloatingContact: React.FC = () => {
               variant="contained" 
               endIcon={<SendIcon />}
               sx={{ 
-                background: 'linear-gradient(90deg, #00f2fe 0%, #4facfe 100%)',
-                color: '#000',
+                background: 'linear-gradient(90deg, #1e40af 0%, #3b82f6 100%)',
+                color: '#fff',
                 fontWeight: 'bold',
                 textTransform: 'none',
                 px: 3,
                 '&:hover': {
-                  background: 'linear-gradient(90deg, #4facfe 0%, #00f2fe 100%)',
-                  boxShadow: '0 4px 15px rgba(0, 242, 254, 0.4)',
+                  background: 'linear-gradient(90deg, #3b82f6 0%, #1e40af 100%)',
+                  boxShadow: '0 4px 15px rgba(30, 64, 175, 0.3)',
                 }
               }}
             >

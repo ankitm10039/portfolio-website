@@ -9,7 +9,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 const Experience: React.FC = () => {
   return (
-    <Box id="experience" sx={{ py: 10, backgroundColor: 'rgba(10, 10, 15, 0.3)' }}>
+    <Box id="experience" sx={{ py: 10, backgroundColor: 'rgba(30, 64, 175, 0.03)' }}>
       <Container maxWidth="md">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -31,7 +31,7 @@ const Experience: React.FC = () => {
               top: 0, 
               bottom: 0, 
               width: '2px', 
-              background: 'linear-gradient(to bottom, #00f2fe, #4facfe)',
+              background: 'linear-gradient(to bottom, #1e40af, #3b82f6)',
               transform: { xs: 'none', md: 'translateX(-50%)' },
               opacity: 0.3
             }} 
@@ -66,8 +66,8 @@ const Experience: React.FC = () => {
                     width: '16px', 
                     height: '16px', 
                     borderRadius: '50%', 
-                    backgroundColor: '#00f2fe',
-                    boxShadow: '0 0 10px #00f2fe, 0 0 20px #4facfe'
+                    backgroundColor: '#1e40af',
+                    boxShadow: '0 0 10px rgba(30, 64, 175, 0.5), 0 0 20px rgba(59, 130, 246, 0.3)'
                   }} 
                 />
 
@@ -87,19 +87,19 @@ const Experience: React.FC = () => {
                       position: 'relative'
                     }}
                   >
-                    <Typography variant="h6" sx={{ color: '#00f2fe', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
+                    <Typography variant="h6" sx={{ color: 'primary.main', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
                       <WorkIcon fontSize="small" /> {exp.role}
                     </Typography>
-                    <Typography variant="subtitle1" sx={{ color: '#fff', mb: 2, fontWeight: 500, display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <LocationOnIcon fontSize="small" sx={{ color: '#4facfe' }} /> {exp.company}
+                    <Typography variant="subtitle1" sx={{ color: 'text.primary', mb: 2, fontWeight: 500, display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <LocationOnIcon fontSize="small" sx={{ color: 'secondary.main' }} /> {exp.company}
                     </Typography>
                     <Box sx={{ display: 'flex', gap: 3, mb: 2, flexWrap: 'wrap' }}>
-                      <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)', display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                      <Typography variant="body2" sx={{ color: 'text.secondary', display: 'flex', alignItems: 'center', gap: 0.5 }}>
                         <CalendarMonthIcon sx={{ fontSize: '1.1rem' }} /> {exp.duration}
                       </Typography>
                       {/* @ts-ignore */}
                       {exp.type && (
-                        <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)', display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                        <Typography variant="body2" sx={{ color: 'text.secondary', display: 'flex', alignItems: 'center', gap: 0.5 }}>
                           {/* @ts-ignore */}
                           <AssignmentIndIcon sx={{ fontSize: '1.1rem' }} /> {exp.type}
                         </Typography>
