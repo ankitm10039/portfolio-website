@@ -6,10 +6,12 @@ import WorkIcon from '@mui/icons-material/WorkOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { useAppTheme } from '../theme/ThemeContext';
 
 const Experience: React.FC = () => {
+  const { mode } = useAppTheme();
   return (
-    <Box id="experience" sx={{ py: 10, backgroundColor: 'rgba(30, 64, 175, 0.03)' }}>
+    <Box id="experience" sx={{ py: 10, backgroundColor: mode === 'light' ? 'rgba(30, 64, 175, 0.03)' : 'rgba(0, 242, 254, 0.03)' }}>
       <Container maxWidth="md">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -31,9 +33,9 @@ const Experience: React.FC = () => {
               top: 0, 
               bottom: 0, 
               width: '2px', 
-              background: 'linear-gradient(to bottom, #1e40af, #3b82f6)',
+              background: mode === 'light' ? 'linear-gradient(to bottom, #1e40af, #3b82f6)' : 'linear-gradient(to bottom, #00f2fe, #4facfe)',
               transform: { xs: 'none', md: 'translateX(-50%)' },
-              opacity: 0.3
+              opacity: mode === 'light' ? 0.3 : 0.5
             }} 
           />
 
@@ -66,8 +68,10 @@ const Experience: React.FC = () => {
                     width: '16px', 
                     height: '16px', 
                     borderRadius: '50%', 
-                    backgroundColor: '#1e40af',
-                    boxShadow: '0 0 10px rgba(30, 64, 175, 0.5), 0 0 20px rgba(59, 130, 246, 0.3)'
+                    backgroundColor: mode === 'light' ? '#1e40af' : '#00f2fe',
+                    boxShadow: mode === 'light' 
+                      ? '0 0 10px rgba(30, 64, 175, 0.5), 0 0 20px rgba(59, 130, 246, 0.3)' 
+                      : '0 0 10px rgba(0, 242, 254, 0.8), 0 0 20px rgba(0, 242, 254, 0.4)'
                   }} 
                 />
 

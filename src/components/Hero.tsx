@@ -12,8 +12,10 @@ import profileImg from "../assets/Profile.png";
 import { Typewriter } from 'react-simple-typewriter';
 import resumePdf from '../assets/resume/Ankit_Meena_Resume.pdf';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
+import { useAppTheme } from "../theme/ThemeContext";
 
 const Hero: React.FC = () => {
+  const { mode } = useAppTheme();
   const particlesInit = useCallback(async (engine: Engine) => {
     // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
     // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
@@ -48,12 +50,12 @@ const Hero: React.FC = () => {
             },
           },
           particles: {
-            color: { value: "#1e40af" },
+            color: { value: mode === 'light' ? "#1e40af" : "#00f2fe" },
             links: {
-              color: "#3b82f6",
+              color: mode === 'light' ? "#3b82f6" : "#4facfe",
               distance: 150,
               enable: true,
-              opacity: 0.2,
+              opacity: mode === 'light' ? 0.2 : 0.4,
               width: 1,
             },
             move: {
@@ -198,7 +200,7 @@ const Hero: React.FC = () => {
                   py: 1.5,
                   fontSize: "1.1rem",
                   color: "primary.main",
-                  "&:hover": { backgroundColor: "rgba(30, 64, 175, 0.05)" },
+                  "&:hover": { backgroundColor: mode === 'light' ? "rgba(30, 64, 175, 0.05)" : "rgba(0, 242, 254, 0.05)" },
                 }}
               >
                 Resume
@@ -230,7 +232,7 @@ const Hero: React.FC = () => {
                   rel="noopener noreferrer"
                   sx={{
                     color: "text.secondary",
-                    "&:hover": { color: "#00f2fe" },
+                    "&:hover": { color: mode === 'light' ? "primary.main" : "#00f2fe" },
                   }}
                 >
                   <GitHubIcon fontSize="large" />
@@ -266,8 +268,8 @@ const Hero: React.FC = () => {
                   height: { xs: 200, sm: 250, md: 350 },
                   borderRadius: "50%",
                   objectFit: "cover",
-                  border: "4px solid rgba(30, 64, 175, 0.3)",
-                  boxShadow: "0 0 40px rgba(30, 64, 175, 0.15)",
+                  border: mode === 'light' ? "4px solid rgba(30, 64, 175, 0.3)" : "4px solid rgba(0, 242, 254, 0.3)",
+                  boxShadow: mode === 'light' ? "0 0 40px rgba(30, 64, 175, 0.15)" : "0 0 40px rgba(0, 242, 254, 0.4)",
                   display: "block",
                 }}
               />

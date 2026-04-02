@@ -4,8 +4,10 @@ import ChatIcon from '@mui/icons-material/Chat';
 import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
 import { resumeData } from '../data/resumeData';
+import { useAppTheme } from '../theme/ThemeContext';
 
 const FloatingContact: React.FC = () => {
+  const { mode } = useAppTheme();
   const [open, setOpen] = useState(false);
   const [userEmail, setUserEmail] = useState('');
   const [subject, setSubject] = useState('');
@@ -36,12 +38,12 @@ const FloatingContact: React.FC = () => {
           bottom: { xs: 24, md: 40 },
           right: { xs: 24, md: 40 },
           zIndex: 9999,
-          background: 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)',
+          background: mode === 'light' ? 'linear-gradient(135deg, #1e40af 0%, #3b82f6 100%)' : 'linear-gradient(135deg, #00f2fe 0%, #4facfe 100%)',
           color: '#fff',
-          boxShadow: '0 8px 24px rgba(30, 64, 175, 0.3)',
+          boxShadow: mode === 'light' ? '0 8px 24px rgba(30, 64, 175, 0.3)' : '0 8px 24px rgba(0, 242, 254, 0.5)',
           '&:hover': {
             transform: 'scale(1.05)',
-            boxShadow: '0 12px 32px rgba(30, 64, 175, 0.4)',
+            boxShadow: mode === 'light' ? '0 12px 32px rgba(30, 64, 175, 0.4)' : '0 12px 32px rgba(0, 242, 254, 0.6)',
           },
           transition: 'all 0.3s ease',
         }}
@@ -55,12 +57,12 @@ const FloatingContact: React.FC = () => {
         PaperProps={{
           className: 'glass-box',
           sx: {
-            background: 'rgba(255, 255, 255, 0.95)',
+            background: mode === 'light' ? 'rgba(255, 255, 255, 0.95)' : 'rgba(17, 17, 26, 0.95)',
             backdropFilter: 'blur(20px)',
-            border: '1px solid rgba(30, 64, 175, 0.2)',
+            border: `1px solid ${mode === 'light' ? 'rgba(30, 64, 175, 0.2)' : 'rgba(255, 255, 255, 0.1)'}`,
             borderRadius: 3,
             minWidth: { xs: '90vw', sm: '450px' },
-            boxShadow: '0 20px 60px rgba(0,0,0,0.1)',
+            boxShadow: mode === 'light' ? '0 20px 60px rgba(0,0,0,0.1)' : '0 20px 60px rgba(0,0,0,0.4)',
           }
         }}
       >
@@ -130,14 +132,14 @@ const FloatingContact: React.FC = () => {
               variant="contained" 
               endIcon={<SendIcon />}
               sx={{ 
-                background: 'linear-gradient(90deg, #1e40af 0%, #3b82f6 100%)',
-                color: '#fff',
+                background: mode === 'light' ? 'linear-gradient(90deg, #1e40af 0%, #3b82f6 100%)' : 'linear-gradient(90deg, #00f2fe 0%, #4facfe 100%)',
+                color: mode === 'light' ? '#fff' : '#000',
                 fontWeight: 'bold',
                 textTransform: 'none',
                 px: 3,
                 '&:hover': {
-                  background: 'linear-gradient(90deg, #3b82f6 0%, #1e40af 100%)',
-                  boxShadow: '0 4px 15px rgba(30, 64, 175, 0.3)',
+                  background: mode === 'light' ? 'linear-gradient(90deg, #3b82f6 0%, #1e40af 100%)' : 'linear-gradient(90deg, #4facfe 0%, #00f2fe 100%)',
+                  boxShadow: mode === 'light' ? '0 4px 15px rgba(30, 64, 175, 0.3)' : '0 4px 15px rgba(0, 242, 254, 0.5)',
                 }
               }}
             >

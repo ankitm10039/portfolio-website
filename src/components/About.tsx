@@ -7,8 +7,10 @@ import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
 import { motion } from 'framer-motion';
 import { resumeData } from '../data/resumeData';
+import { useAppTheme } from '../theme/ThemeContext';
 
 const About: React.FC = () => {
+  const { mode } = useAppTheme();
   return (
     <Box id="about" sx={{ py: 10, position: 'relative' }}>
       <Container maxWidth="lg">
@@ -53,7 +55,12 @@ const About: React.FC = () => {
                           display: 'flex',
                           flexDirection: 'column',
                           transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                          '&:hover': { transform: 'translateY(-5px)', boxShadow: '0 8px 30px rgba(0,242,254,0.15)' }
+                          '&:hover': { 
+                            transform: 'translateY(-5px)', 
+                            boxShadow: mode === 'light' 
+                              ? '0 8px 30px rgba(30, 64, 175, 0.15)' 
+                              : '0 8px 30px rgba(0, 242, 254, 0.25)' 
+                          }
                         }}
                       >
                         <Box sx={{ color: 'secondary.main', mb: 2, '& > svg': { fontSize: '2.5rem' } }}>
@@ -90,11 +97,11 @@ const About: React.FC = () => {
                     key={idx}
                     label={skill}
                     component={motion.div}
-                    whileHover={{ scale: 1.05, backgroundColor: 'rgba(30, 64, 175, 0.1)' }}
+                    whileHover={{ scale: 1.05, backgroundColor: mode === 'light' ? 'rgba(30, 64, 175, 0.1)' : 'rgba(0, 242, 254, 0.2)' }}
                     sx={{ 
-                      backgroundColor: 'rgba(59, 130, 246, 0.05)',
+                      backgroundColor: mode === 'light' ? 'rgba(59, 130, 246, 0.05)' : 'rgba(255, 255, 255, 0.05)',
                       color: 'text.primary',
-                      border: '1px solid rgba(30, 64, 175, 0.15)',
+                      border: `1px solid ${mode === 'light' ? 'rgba(30, 64, 175, 0.15)' : 'rgba(0, 242, 254, 0.3)'}`,
                       fontSize: '1rem',
                       py: 3,
                       px: 2,

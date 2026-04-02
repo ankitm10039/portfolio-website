@@ -1,22 +1,43 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, type PaletteMode } from '@mui/material/styles';
 
-const theme = createTheme({
+export const getTheme = (mode: PaletteMode) => createTheme({
   palette: {
-    mode: 'light',
-    primary: {
-      main: '#1e40af', // Dark Blue
-    },
-    secondary: {
-      main: '#3b82f6', // Light Blue
-    },
-    background: {
-      default: '#ffffff',
-      paper: '#f8fafd',
-    },
-    text: {
-      primary: '#0f172a',
-      secondary: '#475569',
-    },
+    mode,
+    ...(mode === 'light'
+      ? {
+          // Light Mode Palette
+          primary: {
+            main: '#1e40af', // Dark Blue
+          },
+          secondary: {
+            main: '#3b82f6', // Light Blue
+          },
+          background: {
+            default: '#ffffff',
+            paper: '#f8fafd',
+          },
+          text: {
+            primary: '#0f172a',
+            secondary: '#475569',
+          },
+        }
+      : {
+          // Dark Mode Palette
+          primary: {
+            main: '#00f2fe', // Vibrant Cyan
+          },
+          secondary: {
+            main: '#4facfe', // Bright Blue
+          },
+          background: {
+            default: '#050505',
+            paper: '#11111a',
+          },
+          text: {
+            primary: '#ffffff',
+            secondary: '#b3b9c5',
+          },
+        }),
   },
   typography: {
     fontFamily: '"Outfit", "Inter", "Roboto", sans-serif',
@@ -29,28 +50,31 @@ const theme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          scrollbarColor: "#3b82f6 #f1f5f9",
+          '--gradient': mode === 'light' 
+            ? 'linear-gradient(to right, #1e40af, #3b82f6, #1e40af)'
+            : 'linear-gradient(to right, #00f2fe, #4facfe, #00f2fe)',
+          scrollbarColor: mode === 'light' ? "#3b82f6 #f1f5f9" : "#4facfe #0a0a0a",
           "&::-webkit-scrollbar, & *::-webkit-scrollbar": {
-            backgroundColor: "#f1f5f9",
+            backgroundColor: mode === 'light' ? "#f1f5f9" : "#0a0a0a",
             width: "8px",
           },
           "&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb": {
             borderRadius: 8,
-            backgroundColor: "#3b82f6",
+            backgroundColor: mode === 'light' ? "#3b82f6" : "#4facfe",
             minHeight: 24,
-            border: "2px solid #f1f5f9",
+            border: `2px solid ${mode === 'light' ? "#f1f5f9" : "#0a0a0a"}`,
           },
           "&::-webkit-scrollbar-thumb:focus, & *::-webkit-scrollbar-thumb:focus": {
-            backgroundColor: "#1e40af",
+            backgroundColor: mode === 'light' ? "#1e40af" : "#00f2fe",
           },
           "&::-webkit-scrollbar-thumb:active, & *::-webkit-scrollbar-thumb:active": {
-            backgroundColor: "#1e40af",
+            backgroundColor: mode === 'light' ? "#1e40af" : "#00f2fe",
           },
           "&::-webkit-scrollbar-thumb:hover, & *::-webkit-scrollbar-thumb:hover": {
-            backgroundColor: "#1e40af",
+            backgroundColor: mode === 'light' ? "#1e40af" : "#00f2fe",
           },
           "&::-webkit-scrollbar-corner, & *::-webkit-scrollbar-corner": {
-            backgroundColor: "#f1f5f9",
+            backgroundColor: mode === 'light' ? "#f1f5f9" : "#0a0a0a",
           },
         },
       },
@@ -62,10 +86,14 @@ const theme = createTheme({
           textTransform: 'none',
           fontWeight: 600,
           padding: '10px 24px',
-          boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+          boxShadow: mode === 'light' 
+            ? '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)'
+            : '0 4px 14px 0 rgba(0, 242, 254, 0.39)',
           transition: 'all 0.3s ease',
           '&:hover': {
-            boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+            boxShadow: mode === 'light'
+              ? '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)'
+              : '0 6px 20px rgba(0, 242, 254, 0.6)',
             transform: 'translateY(-2px)'
           }
         },
@@ -75,19 +103,19 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 20,
-          background: 'rgba(255, 255, 255, 0.8)',
+          background: mode === 'light' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(17, 17, 26, 0.6)',
           backdropFilter: 'blur(16px)',
-          border: '1px solid rgba(59, 130, 246, 0.1)',
+          border: `1px solid ${mode === 'light' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(255, 255, 255, 0.08)'}`,
           transition: 'all 0.3s ease',
           '&:hover': {
-            border: '1px solid rgba(37, 99, 235, 0.3)',
+            border: `1px solid ${mode === 'light' ? 'rgba(37, 99, 235, 0.3)' : 'rgba(0, 242, 254, 0.3)'}`,
             transform: 'translateY(-5px)',
-            boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)'
+            boxShadow: mode === 'light'
+              ? '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)'
+              : '0 10px 30px rgba(0, 242, 254, 0.2)'
           }
         },
       },
     },
   },
 });
-
-export default theme;

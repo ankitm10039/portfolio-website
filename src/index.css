@@ -9,20 +9,13 @@
 
 body {
   font-family: 'Outfit', sans-serif;
-  background-color: #ffffff;
-  color: #111827;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-::selection {
-  background-color: rgba(37, 99, 235, 0.2);
-  color: #1e40af;
-}
-
 .gradient-text {
-  background: linear-gradient(to right, #1e40af, #3b82f6, #1e40af);
+  background: var(--gradient);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -37,10 +30,8 @@ body {
 }
 
 .glass-box {
-  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(59, 130, 246, 0.15);
   border-radius: 20px;
 }
 

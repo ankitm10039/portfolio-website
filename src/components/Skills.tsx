@@ -20,6 +20,7 @@ import {
   FaVuejs,
 } from "react-icons/fa";
 import { resumeData } from "../data/resumeData";
+import { useAppTheme } from "../theme/ThemeContext";
 
 const getIconForSkill = (skill: string) => {
   const s = skill.toLowerCase();
@@ -65,8 +66,8 @@ const getIconForSkill = (skill: string) => {
 
   return <FaCode color="#888888" style={{ marginRight: "8px" }} />;
 };
-
 const Skills: React.FC = () => {
+  const { mode } = useAppTheme();
   const { languages, frameworks, tools } = resumeData.technicalSkills;
 
   const SkillCategory = ({
@@ -98,7 +99,9 @@ const Skills: React.FC = () => {
             transition: "transform 0.3s ease",
             "&:hover": {
               transform: "translateY(-10px)",
-              boxShadow: "0 10px 30px rgba(30, 64, 175, 0.1)",
+              boxShadow: mode === 'light' 
+                ? "0 10px 30px rgba(30, 64, 175, 0.1)" 
+                : "0 10px 30px rgba(0, 242, 254, 0.2)",
             },
           }}
         >
@@ -122,17 +125,17 @@ const Skills: React.FC = () => {
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  background: "rgba(59, 130, 246, 0.05)",
+                  background: mode === 'light' ? "rgba(59, 130, 246, 0.05)" : "rgba(255, 255, 255, 0.05)",
                   px: 2,
                   py: 1,
                   borderRadius: 2,
-                  border: "1px solid rgba(59, 130, 246, 0.1)",
+                  border: `1px solid ${mode === 'light' ? "rgba(59, 130, 246, 0.1)" : "rgba(255, 255, 255, 0.1)"}`,
                   color: "text.primary",
                   fontSize: "0.95rem",
                   fontWeight: 500,
                   transition: "all 0.3s ease",
                   "&:hover": {
-                    background: "rgba(37, 99, 235, 0.1)",
+                    background: mode === 'light' ? "rgba(37, 99, 235, 0.1)" : "rgba(0, 242, 254, 0.1)",
                     borderColor: "primary.main",
                     color: "primary.main",
                   },

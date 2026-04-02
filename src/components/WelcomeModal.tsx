@@ -3,8 +3,10 @@ import { Backdrop, Box, Button, Typography } from "@mui/material";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { Typewriter } from "react-simple-typewriter";
+import { useAppTheme } from "../theme/ThemeContext";
 
 const WelcomeModal: React.FC = () => {
+  const { mode } = useAppTheme();
   const [isOpen, setIsOpen] = useState(true);
 
 
@@ -30,7 +32,7 @@ const WelcomeModal: React.FC = () => {
             zIndex: (theme) => theme.zIndex.drawer + 9999,
             // Deep blur effect on everything behind the modal
             backdropFilter: "blur(12px)",
-            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            backgroundColor: mode === 'light' ? "rgba(255, 255, 255, 0.8)" : "rgba(5, 5, 10, 0.75)",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -58,8 +60,8 @@ const WelcomeModal: React.FC = () => {
                 flexDirection: "column",
                 alignItems: "center",
                 textAlign: "center",
-                border: "1px solid rgba(30, 64, 175, 0.15)",
-                boxShadow: "0 20px 80px rgba(0,0,0,0.08)",
+                border: `1px solid ${mode === 'light' ? "rgba(30, 64, 175, 0.15)" : "rgba(0, 242, 254, 0.3)"}`,
+                boxShadow: mode === 'light' ? "0 20px 80px rgba(0,0,0,0.08)" : "0 20px 80px rgba(0,242,254,0.15)",
                 borderRadius: 4,
               }}
             >
@@ -77,7 +79,7 @@ const WelcomeModal: React.FC = () => {
                   width: "120px",
                   height: "120px",
                   marginBottom: "1rem",
-                  filter: "drop-shadow(0 10px 20px rgba(30, 64, 175, 0.2))",
+                  filter: `drop-shadow(0 10px 20px ${mode === 'light' ? "rgba(30, 64, 175, 0.2)" : "rgba(0, 242, 254, 0.3)"})`,
                 }}
               />
 
@@ -146,11 +148,14 @@ const WelcomeModal: React.FC = () => {
                     "&:hover": {
                       borderWidth: 2,
                       borderColor: "transparent",
-                      background:
-                        "linear-gradient(90deg, #1e40af 0%, #3b82f6 100%)",
-                      color: "#fff",
+                      background: mode === 'light'
+                        ? "linear-gradient(90deg, #1e40af 0%, #3b82f6 100%)"
+                        : "linear-gradient(90deg, #00f2fe 0%, #4facfe 100%)",
+                      color: mode === 'light' ? "#fff" : "#000",
                       transform: "translateY(-3px)",
-                      boxShadow: "0 12px 30px rgba(30, 64, 175, 0.4)",
+                      boxShadow: mode === 'light' 
+                        ? "0 12px 30px rgba(30, 64, 175, 0.4)" 
+                        : "0 12px 30px rgba(0, 242, 254, 0.6)",
                     },
                   }}
                 >

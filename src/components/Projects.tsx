@@ -2,10 +2,12 @@ import React from 'react';
 import { Box, Container, Typography, Card, CardContent, Chip } from '@mui/material';
 import { motion } from 'framer-motion';
 import { resumeData } from '../data/resumeData';
+import { useAppTheme } from '../theme/ThemeContext';
 
 const Projects: React.FC = () => {
+  const { mode } = useAppTheme();
   return (
-    <Box id="projects" sx={{ py: 10, backgroundColor: 'rgba(30, 64, 175, 0.03)' }}>
+    <Box id="projects" sx={{ py: 10, backgroundColor: mode === 'light' ? 'rgba(30, 64, 175, 0.03)' : 'rgba(0, 242, 254, 0.03)' }}>
       <Container maxWidth="lg">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -38,12 +40,14 @@ const Projects: React.FC = () => {
                     flexDirection: 'column',
                     cursor: 'pointer',
                     '&:hover': {
-                      boxShadow: '0 8px 32px rgba(30, 64, 175, 0.1)'
+                      boxShadow: mode === 'light' 
+                        ? '0 8px 32px rgba(30, 64, 175, 0.1)' 
+                        : '0 8px 32px rgba(0, 242, 254, 0.2)'
                     }
                   }}
                 >
                   <CardContent sx={{ p: 4, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-                    <Box sx={{ mb: 2, width: 50, height: 5, background: 'linear-gradient(to right, #1e40af, #3b82f6)', borderRadius: 2 }} />
+                    <Box sx={{ mb: 2, width: 50, height: 5, background: mode === 'light' ? 'linear-gradient(to right, #1e40af, #3b82f6)' : 'linear-gradient(to right, #00f2fe, #4facfe)', borderRadius: 2 }} />
                     <Typography variant="h5" sx={{ mb: 2, fontWeight: 700, color: 'text.primary' }}>
                       {project.name}
                     </Typography>
@@ -60,13 +64,13 @@ const Projects: React.FC = () => {
                             label={tech} 
                             size="small" 
                             sx={{ 
-                              bgcolor: 'rgba(59, 130, 246, 0.05)', 
-                              color: 'primary.main', 
-                              border: '1px solid rgba(30, 64, 175, 0.1)',
-                              fontSize: '0.75rem',
-                              fontWeight: 600,
-                              borderRadius: 1
-                            }} 
+                               bgcolor: mode === 'light' ? 'rgba(59, 130, 246, 0.05)' : 'rgba(255, 255, 255, 0.05)', 
+                               color: 'primary.main', 
+                               border: `1px solid ${mode === 'light' ? 'rgba(30, 64, 175, 0.1)' : 'rgba(255, 255, 255, 0.1)'}`,
+                               fontSize: '0.75rem',
+                               fontWeight: 600,
+                               borderRadius: 1
+                             }} 
                           />
                         ))}
                       </Box>

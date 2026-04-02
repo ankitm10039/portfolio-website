@@ -4,11 +4,15 @@ import { motion } from 'framer-motion';
 import MenuIcon from '@mui/icons-material/Menu';
 import resumePdf from '../assets/resume/Ankit_Meena_Resume.pdf';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import { useAppTheme } from '../theme/ThemeContext';
 
 const navItems = ['Home', 'About', 'Experience', 'Skills', 'Projects', 'Contact'];
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
+  const { mode, toggleTheme } = useAppTheme();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -36,9 +40,13 @@ const Navbar: React.FC = () => {
       position="fixed" 
       elevation={scrolled ? 4 : 0}
       sx={{
-        background: scrolled ? 'rgba(255, 255, 255, 0.8)' : 'transparent',
+        background: scrolled 
+          ? (mode === 'light' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(5, 5, 5, 0.8)') 
+          : 'transparent',
         backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(30, 64, 175, 0.1)' : 'none',
+        borderBottom: scrolled 
+          ? `1px solid ${mode === 'light' ? 'rgba(30, 64, 175, 0.1)' : 'rgba(255, 255, 255, 0.05)'}` 
+          : 'none',
         transition: 'all 0.3s ease-in-out',
         padding: '0.5rem 0'
       }}
@@ -51,7 +59,7 @@ const Navbar: React.FC = () => {
           className="gradient-text"
           onClick={() => scrollToSection('home')}
         >
-          Ankit<span style={{ color: scrolled ? 'inherit' : 'primary.main' }}>.dev</span>
+          Ankit<span style={{ color: scrolled ? 'inherit' : (mode === 'light' ? theme.palette.primary.main : '#fff') }}>.dev</span>
         </Typography>
 
         {!isMobile ? (
@@ -60,7 +68,9 @@ const Navbar: React.FC = () => {
               <Button 
                 key={item} 
                 sx={{ 
-                  color: scrolled ? 'text.primary' : 'primary.main', 
+                  color: scrolled 
+                    ? 'text.primary' 
+                    : (mode === 'light' ? 'primary.main' : '#fff'), 
                   fontSize: '1rem',
                   fontWeight: 500,
                   position: 'relative',
@@ -93,11 +103,31 @@ const Navbar: React.FC = () => {
             >
               Resume
             </Button>
+            <IconButton 
+              onClick={toggleTheme} 
+              sx={{ 
+                ml: 1, 
+                color: scrolled ? 'text.primary' : (mode === 'light' ? 'primary.main' : '#fff') 
+              }}
+            >
+              {mode === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
+            </IconButton>
           </Box>
         ) : (
-          <IconButton sx={{ color: scrolled ? 'text.primary' : 'primary.main' }}>
-            <MenuIcon />
-          </IconButton>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <IconButton 
+              onClick={toggleTheme} 
+              sx={{ 
+                mr: 1, 
+                color: scrolled ? 'text.primary' : (mode === 'light' ? 'primary.main' : '#fff') 
+              }}
+            >
+              {mode === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
+            </IconButton>
+            <IconButton sx={{ color: scrolled ? 'text.primary' : (mode === 'light' ? 'primary.main' : '#fff') }}>
+              <MenuIcon />
+            </IconButton>
+          </Box>
         )}
       </Toolbar>
     </AppBar>
