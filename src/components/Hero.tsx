@@ -8,13 +8,16 @@ import Particles from "react-tsparticles";
 import type { Engine } from "tsparticles-engine";
 import { loadSlim } from "tsparticles-slim";
 import { resumeData } from "../data/resumeData";
-import profileImg from "../assets/Profile.png";
 import { Typewriter } from 'react-simple-typewriter';
-import resumePdf from '../assets/resume/Ankit_Meena_Resume.pdf';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import { useAppTheme } from "../theme/ThemeContext";
+import profileImg from "../assets/Profile.png";
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onDownloadClick: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onDownloadClick }) => {
   const { mode } = useAppTheme();
   const particlesInit = useCallback(async (engine: Engine) => {
     // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
@@ -32,6 +35,8 @@ const Hero: React.FC = () => {
         justifyContent: "center",
         position: "relative",
         overflow: "hidden",
+        pt: { xs: "90px", md: "110px" },
+        pb: { xs: "60px", md: "80px" },
       }}
     >
       <Particles
@@ -191,9 +196,7 @@ const Hero: React.FC = () => {
               <Button
                 variant="text"
                 size="large"
-                component="a"
-                href={resumePdf}
-                download="Ankit_Meena_Resume.pdf"
+                onClick={onDownloadClick}
                 startIcon={<CloudDownloadIcon />}
                 sx={{
                   px: 3,

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { AppBar, Toolbar, Typography, Button, Box, IconButton, useMediaQuery, useTheme } from '@mui/material';
 import { motion } from 'framer-motion';
 import MenuIcon from '@mui/icons-material/Menu';
-import resumePdf from '../assets/resume/Ankit_Meena_Resume.pdf';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
@@ -10,7 +9,11 @@ import { useAppTheme } from '../theme/ThemeContext';
 
 const navItems = ['Home', 'About', 'Experience', 'Skills', 'Projects', 'Contact'];
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  onDownloadClick: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onDownloadClick }) => {
   const [scrolled, setScrolled] = useState(false);
   const { mode, toggleTheme } = useAppTheme();
   const theme = useTheme();
@@ -45,7 +48,7 @@ const Navbar: React.FC = () => {
           : 'transparent',
         backdropFilter: scrolled ? 'blur(12px)' : 'none',
         borderBottom: scrolled 
-          ? `1px solid ${mode === 'light' ? 'rgba(30, 64, 175, 0.1)' : 'rgba(255, 255, 255, 0.05)'}` 
+          ? `1px solid ${mode === 'light' ? 'rgba(30, 64, 175, 0.15)' : 'rgba(255, 255, 255, 0.05)'}` 
           : 'none',
         transition: 'all 0.3s ease-in-out',
         padding: '0.5rem 0'
@@ -84,9 +87,7 @@ const Navbar: React.FC = () => {
             ))}
             
             <Button 
-              component="a"
-              href={resumePdf}
-              download="Ankit_Meena_Resume.pdf"
+              onClick={onDownloadClick}
               variant="outlined"
               size="small"
               startIcon={<CloudDownloadIcon />}
@@ -115,6 +116,16 @@ const Navbar: React.FC = () => {
           </Box>
         ) : (
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <IconButton 
+              onClick={onDownloadClick} 
+              sx={{ 
+                mr: 1, 
+                color: scrolled ? 'text.primary' : (mode === 'light' ? 'primary.main' : '#fff') 
+              }}
+              aria-label="Download Resume"
+            >
+              <CloudDownloadIcon />
+            </IconButton>
             <IconButton 
               onClick={toggleTheme} 
               sx={{ 
