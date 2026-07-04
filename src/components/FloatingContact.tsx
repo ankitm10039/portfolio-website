@@ -111,12 +111,14 @@ const FloatingContact: React.FC = () => {
             backdropFilter: 'blur(20px)',
             border: `1px solid ${mode === 'light' ? 'rgba(30, 64, 175, 0.2)' : 'rgba(255, 255, 255, 0.1)'}`,
             borderRadius: 3,
-            minWidth: { xs: '90vw', sm: '450px' },
+            width: { xs: '95vw', sm: '550px' },
+            maxWidth: '100%',
+            overflow: 'hidden',
             boxShadow: mode === 'light' ? '0 20px 60px rgba(0,0,0,0.1)' : '0 20px 60px rgba(0,0,0,0.4)',
           }
         }}
       >
-        <DialogTitle component="div" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'text.primary' }}>
+        <DialogTitle component="div" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'text.primary', pb: 1 }}>
           <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Let's Connect!</Typography>
           <IconButton onClick={handleClose} sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main' } }} disabled={loading}>
             <CloseIcon />
@@ -150,8 +152,8 @@ const FloatingContact: React.FC = () => {
               exit={{ opacity: 0 }}
             >
               <form onSubmit={handleSendMessage}>
-                <DialogContent dividers sx={{ borderColor: 'rgba(255,255,255,0.1)' }}>
-                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.5, mt: 1 }}>
+                <DialogContent sx={{ border: 'none', overflowY: 'hidden', py: 1.5 }}>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.2 }}>
                     {errorMsg && (
                       <Alert severity="error" sx={{ borderRadius: 1.5 }}>
                         {errorMsg}
@@ -213,7 +215,7 @@ const FloatingContact: React.FC = () => {
                       label="Message"
                       variant="outlined"
                       multiline
-                      rows={4}
+                      rows={3}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       disabled={loading}
