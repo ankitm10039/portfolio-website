@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const topic = process.env.NTFY_TOPIC;
+const topic = process.env.NTFYTOPIC;
 
 interface NtfyPayload {
   name: string;
