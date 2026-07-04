@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import crypto from 'crypto';
 import { client } from '../config/turso';
 import { sendContactNotification } from '../services/email.service';
+import { sendNtfyNotification } from '../services/ntfy.service';
 
 /**
  * Handle contact form submission, store in Turso DB, and dispatch email notification
@@ -29,15 +30,21 @@ export const submitContactForm = async (
       ]
     });
 
-    // 2. Dispatch email notification asynchronously (non-blocking)
-    // Run in background so we can respond to the user immediately
-    sendContactNotification({
+    const contactPayload = {
       name: name.trim(),
       email: email.trim(),
       subject: subject.trim(),
       message: message.trim()
-    }).catch(err => {
+    };
+
+    // 2. Dispatch email notification asynchronously (non-blocking)
+    sendContactNotification(contactPayload).catch(err => {
       console.error('[Controller Error] Background email dispatch failed:', err);
+    });
+
+    // 3. Dispatch mobile push notification asynchronously (non-blocking)
+    sendNtfyNotification(contactPayload).catch(err => {
+      console.error('[Controller Error] Background push notification dispatch failed:', err);
     });
 
     // 3. Return successful response
