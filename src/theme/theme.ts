@@ -39,8 +39,11 @@ export const getTheme = (mode: PaletteMode) => createTheme({
           },
         }),
   },
+  // Sharp design: no rounded corners anywhere by default
+  shape: { borderRadius: 0 },
   typography: {
-    fontFamily: '"Outfit", "Inter", "Roboto", sans-serif',
+    // Satoshi for the whole UI; the name and designation use Tangerine separately
+    fontFamily: '"Satoshi", "Segoe UI", "Roboto", sans-serif',
     h1: { fontWeight: 800, letterSpacing: '-0.02em' },
     h2: { fontWeight: 700, letterSpacing: '-0.01em' },
     h3: { fontWeight: 700 },
@@ -59,7 +62,7 @@ export const getTheme = (mode: PaletteMode) => createTheme({
             width: "8px",
           },
           "&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb": {
-            borderRadius: 8,
+            borderRadius: 0,
             backgroundColor: mode === 'light' ? "#3b82f6" : "#4facfe",
             minHeight: 24,
             border: `2px solid ${mode === 'light' ? "#f1f5f9" : "#0a0a0a"}`,
@@ -82,7 +85,7 @@ export const getTheme = (mode: PaletteMode) => createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 12,
+          borderRadius: 0,
           textTransform: 'none',
           fontWeight: 600,
           padding: '10px 24px',
@@ -102,7 +105,7 @@ export const getTheme = (mode: PaletteMode) => createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: 20,
+          borderRadius: 0,
           background: mode === 'light' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(17, 17, 26, 0.6)',
           backdropFilter: 'blur(16px)',
           border: `1px solid ${mode === 'light' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(255, 255, 255, 0.08)'}`,
@@ -117,5 +120,10 @@ export const getTheme = (mode: PaletteMode) => createTheme({
         },
       },
     },
+    // Components that have their own built-in rounding
+    MuiChip: { styleOverrides: { root: { borderRadius: 0 } } },
+    MuiIconButton: { styleOverrides: { root: { borderRadius: 0 } } },
+    MuiFab: { styleOverrides: { root: { borderRadius: 0 } } },
+    MuiPaper: { styleOverrides: { rounded: { borderRadius: 0 } } },
   },
 });

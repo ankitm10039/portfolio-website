@@ -1,32 +1,44 @@
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import { Box, Button, Container, IconButton, Typography } from "@mui/material";
-import { motion } from "framer-motion";
-import React, { useCallback } from "react";
-import Particles from "react-tsparticles";
-import type { Engine } from "tsparticles-engine";
-import { loadSlim } from "tsparticles-slim";
-import { resumeData } from "../data/resumeData";
-import { Typewriter } from 'react-simple-typewriter';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
-import { useAppTheme } from "../theme/ThemeContext";
-import profileImg from "../assets/Profile.png";
+import { Box, Button, Container, IconButton, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { motion, useReducedMotion } from "framer-motion";
+import React, { Suspense, lazy } from "react";
+import { resumeData, yearsOfExperience } from "../data/resumeData";
+import { useAppTheme } from "../theme/useAppTheme";
+import profileImg from "../assets/Profile.webp";
+import TypewriterText from "./TypewriterText";
+
+// Loaded separately so the particle engine doesn't block the first paint
+const ParticleBackground = lazy(() => import("./ParticleBackground"));
 
 interface HeroProps {
   onDownloadClick: () => void;
+  // True once the loader and welcome screen are gone, so the typing is actually seen
+  introReady: boolean;
 }
 
-const Hero: React.FC<HeroProps> = ({ onDownloadClick }) => {
-  const { mode } = useAppTheme();
-  const particlesInit = useCallback(async (engine: Engine) => {
-    // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
-    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-    await loadSlim(engine);
-  }, []);
+const NAME_TYPE_SPEED = 120;
+
+const Hero: React.FC<HeroProps> = ({ onDownloadClick, introReady }) => {
+  const { mode, accent } = useAppTheme();
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+  const reduceMotion = useReducedMotion();
+  const showParticles = isDesktop && !reduceMotion;
+
+  const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+
+  const socialLinks = [
+    { href: resumeData.socialLinks.linkedin, label: "LinkedIn profile", icon: <LinkedInIcon fontSize="large" />, hover: "primary.main" },
+    { href: resumeData.socialLinks.github, label: "GitHub profile", icon: <GitHubIcon fontSize="large" />, hover: "primary.main" },
+    { href: resumeData.socialLinks.whatsapp, label: "Chat on WhatsApp", icon: <WhatsAppIcon fontSize="large" />, hover: "#25D366" },
+  ];
 
   return (
     <Box
+      component="section"
       id="home"
       sx={{
         minHeight: "100vh",
@@ -39,46 +51,11 @@ const Hero: React.FC<HeroProps> = ({ onDownloadClick }) => {
         pb: { xs: "60px", md: "80px" },
       }}
     >
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        options={{
-          background: { color: { value: "transparent" } },
-          fpsLimit: 60,
-          interactivity: {
-            events: {
-              onHover: { enable: true, mode: "repulse" },
-              resize: true,
-            },
-            modes: {
-              repulse: { distance: 100, duration: 0.4 },
-            },
-          },
-          particles: {
-            color: { value: mode === 'light' ? "#1e40af" : "#00f2fe" },
-            links: {
-              color: mode === 'light' ? "#3b82f6" : "#4facfe",
-              distance: 150,
-              enable: true,
-              opacity: mode === 'light' ? 0.2 : 0.4,
-              width: 1,
-            },
-            move: {
-              direction: "none",
-              enable: true,
-              outModes: { default: "bounce" },
-              random: false,
-              speed: 1,
-              straight: false,
-            },
-            number: { density: { enable: true, area: 800 }, value: 60 },
-            opacity: { value: 0.3 },
-            shape: { type: "circle" },
-            size: { value: { min: 1, max: 3 } },
-          },
-          detectRetina: true,
-        }}
-      />
+      {showParticles && (
+        <Suspense fallback={null}>
+          <ParticleBackground />
+        </Suspense>
+      )}
 
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
         <Box
@@ -99,9 +76,9 @@ const Hero: React.FC<HeroProps> = ({ onDownloadClick }) => {
             >
               <Typography
                 variant="h1"
-                sx={{ fontSize: { xs: "3.5rem", md: "6rem" }, mb: 1, fontFamily: '"Niconne", cursive' }}
+                sx={{ fontSize: { xs: "4.2rem", md: "7rem" }, lineHeight: 1, mb: 1, fontFamily: '"Tangerine", cursive', fontWeight: 700, letterSpacing: 0 }}
               >
-                {resumeData.personalInfo.name}
+                <TypewriterText text={resumeData.personalInfo.name} start={introReady} startDelay={300} typeSpeed={NAME_TYPE_SPEED} loop pauseMs={4000} deleteSpeed={60} />
               </Typography>
             </motion.div>
 
@@ -112,24 +89,25 @@ const Hero: React.FC<HeroProps> = ({ onDownloadClick }) => {
             >
               <Typography
                 variant="h3"
+                component="p"
                 sx={{
-                  fontSize: { xs: "1.8rem", md: "2.5rem" },
-                  mb: 3,
+                  color: 'primary.main',
+                  fontFamily: '"Tangerine", cursive',
                   fontWeight: 700,
-                  minHeight: { xs: "40px", md: "60px" },
-                  display: "flex",
-                  alignItems: "center"
+                  fontSize: { xs: "2.4rem", sm: "2.8rem", md: "3.4rem" },
+                  lineHeight: 1.15,
+                  letterSpacing: 0,
+                  mb: 3,
                 }}
-                className="gradient-text"
               >
-                <Typewriter
-                  words={['Senior Software Engineer', 'Full Stack Developer', 'Technical Architect']}
-                  loop={0}
-                  cursor
-                  cursorStyle='_'
-                  typeSpeed={80}
-                  deleteSpeed={50}
-                  delaySpeed={1500}
+                {/* Starts once the name has finished, then keeps typing and erasing */}
+                <TypewriterText
+                  text={resumeData.personalInfo.role}
+                  start={introReady}
+                  startDelay={300 + resumeData.personalInfo.name.length * NAME_TYPE_SPEED + 600}
+                  typeSpeed={70}
+                  loop
+                  pauseMs={3000}
                 />
               </Typography>
             </motion.div>
@@ -141,6 +119,7 @@ const Hero: React.FC<HeroProps> = ({ onDownloadClick }) => {
             >
               <Typography
                 variant="h6"
+                component="p"
                 sx={{
                   color: "text.secondary",
                   mb: 6,
@@ -149,7 +128,8 @@ const Hero: React.FC<HeroProps> = ({ onDownloadClick }) => {
                   fontWeight: 400,
                 }}
               >
-                An enthusiastic and highly energetic professional with expertise in technical development, focused on creating high revenue-generating products.
+                Full Stack Engineer with {yearsOfExperience} years of experience building scalable web applications with Python, FastAPI,
+                Vue.js, React and Next.js, from API design to cloud deployment.
               </Typography>
             </motion.div>
 
@@ -162,11 +142,7 @@ const Hero: React.FC<HeroProps> = ({ onDownloadClick }) => {
                 variant="contained"
                 size="large"
                 color="primary"
-                onClick={() => {
-                  document
-                    .getElementById("projects")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }}
+                onClick={() => scrollTo("projects")}
                 sx={{ mr: 2, mb: { xs: 2, sm: 0 }, px: 4, py: 1.5, fontSize: "1.1rem" }}
               >
                 View Projects
@@ -175,18 +151,13 @@ const Hero: React.FC<HeroProps> = ({ onDownloadClick }) => {
                 variant="outlined"
                 size="large"
                 color="primary"
-                onClick={() => {
-                  document
-                    .getElementById("contact")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }}
+                onClick={() => scrollTo("contact")}
                 sx={{
                   mr: 2,
                   mb: { xs: 2, sm: 0 },
                   px: 4,
                   py: 1.5,
                   fontSize: "1.1rem",
-                  borderRadius: 3,
                   borderWidth: 2,
                   "&:hover": { borderWidth: 2 },
                 }}
@@ -203,7 +174,8 @@ const Hero: React.FC<HeroProps> = ({ onDownloadClick }) => {
                   py: 1.5,
                   fontSize: "1.1rem",
                   color: "primary.main",
-                  "&:hover": { backgroundColor: mode === 'light' ? "rgba(30, 64, 175, 0.05)" : "rgba(0, 242, 254, 0.05)" },
+                  boxShadow: "none",
+                  "&:hover": { backgroundColor: accent.soft },
                 }}
               >
                 Resume
@@ -216,42 +188,19 @@ const Hero: React.FC<HeroProps> = ({ onDownloadClick }) => {
               transition={{ duration: 0.5, delay: 1.0 }}
             >
               <Box sx={{ display: "flex", gap: 3, mt: 4 }}>
-                <IconButton
-                  component="a"
-                  href={resumeData.socialLinks.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  sx={{
-                    color: "text.secondary",
-                    "&:hover": { color: "primary.main" },
-                  }}
-                >
-                  <LinkedInIcon fontSize="large" />
-                </IconButton>
-                <IconButton
-                  component="a"
-                  href={resumeData.socialLinks.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  sx={{
-                    color: "text.secondary",
-                    "&:hover": { color: mode === 'light' ? "primary.main" : "#00f2fe" },
-                  }}
-                >
-                  <GitHubIcon fontSize="large" />
-                </IconButton>
-                <IconButton
-                  component="a"
-                  href={resumeData.socialLinks.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  sx={{
-                    color: "text.secondary",
-                    "&:hover": { color: "#25D366" },
-                  }}
-                >
-                  <WhatsAppIcon fontSize="large" />
-                </IconButton>
+                {socialLinks.map((link) => (
+                  <IconButton
+                    key={link.label}
+                    component="a"
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.label}
+                    sx={{ color: "text.secondary", "&:hover": { color: link.hover } }}
+                  >
+                    {link.icon}
+                  </IconButton>
+                ))}
               </Box>
             </motion.div>
           </Box>
@@ -265,14 +214,17 @@ const Hero: React.FC<HeroProps> = ({ onDownloadClick }) => {
               <Box
                 component="img"
                 src={profileImg}
-                alt="Ankit Meena"
+                alt="Portrait of Ankit Meena"
+                width={350}
+                height={350}
+                fetchPriority="high"
                 sx={{
                   width: { xs: 200, sm: 250, md: 350 },
                   height: { xs: 200, sm: 250, md: 350 },
                   borderRadius: "50%",
                   objectFit: "cover",
-                  border: mode === 'light' ? "4px solid rgba(30, 64, 175, 0.3)" : "4px solid rgba(0, 242, 254, 0.3)",
-                  boxShadow: mode === 'light' ? "0 0 40px rgba(30, 64, 175, 0.15)" : "0 0 40px rgba(0, 242, 254, 0.4)",
+                  border: `4px solid ${accent.glowStrong}`,
+                  boxShadow: `0 0 40px ${mode === 'light' ? accent.glow : accent.glowStrong}`,
                   display: "block",
                 }}
               />

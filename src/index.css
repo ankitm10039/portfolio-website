@@ -1,17 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Niconne&display=swap');
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: 'Outfit', sans-serif;
+  font-family: "Satoshi", "Segoe UI", "Roboto", sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Offset anchor scrolling so section headings are not hidden behind the fixed navbar */
+section[id] {
+  scroll-margin-top: 72px;
 }
 
 .gradient-text {
@@ -32,7 +38,36 @@ body {
 .glass-box {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-radius: 20px;
+  border-radius: 0;
+}
+
+/* Hover border trace (see TraceBorder.tsx) */
+.trace-card {
+  position: relative;
+}
+
+.trace-border {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.trace-border rect {
+  fill: none;
+  /* Half of this sits outside the svg and is clipped, leaving a 3px line on the card edge */
+  stroke-width: 6;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  transition: stroke-dashoffset 0.9s ease;
+}
+
+.trace-card:hover > .trace-border rect,
+.trace-card:focus-within > .trace-border rect {
+  stroke-dashoffset: 0;
 }
 
 #tsparticles {
@@ -42,4 +77,63 @@ body {
   width: 100%;
   height: 100%;
   z-index: -1;
+}
+
+/* Loader rings, based on Uiverse.io by escannord */
+.loader {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.load {
+  display: inline-block;
+  /* --i is a unitless ring number, so the size needs px here */
+  height: calc(var(--i) * 15px);
+  width: calc(var(--i) * 15px);
+  background-color: transparent;
+  position: absolute;
+  border-top: 5px var(--loader-color, rgb(47, 0, 255)) solid;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: turn 2s infinite linear;
+}
+
+.load:nth-child(odd) {
+  animation: turn 2s infinite linear reverse;
+}
+
+@keyframes turn {
+  100% {
+    transform: translate(-50%, -50%) rotateZ(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Keep the loader spinning slowly so it still reads as "loading" */
+  .load,
+  .load:nth-child(odd) {
+    animation-duration: 6s !important;
+    animation-iteration-count: infinite !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .gradient-text {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

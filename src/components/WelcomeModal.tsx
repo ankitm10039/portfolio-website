@@ -1,38 +1,45 @@
-import CelebrationIcon from "@mui/icons-material/Celebration";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Backdrop, Box, Button, Typography } from "@mui/material";
-import { AnimatePresence, motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
-import { Typewriter } from "react-simple-typewriter";
-import { useAppTheme } from "../theme/ThemeContext";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import React, { useEffect } from "react";
+import TypewriterText from "./TypewriterText";
+import { useAppTheme } from "../theme/useAppTheme";
+import { yearsOfExperience } from "../data/resumeData";
 
-const WelcomeModal: React.FC = () => {
-  const { mode } = useAppTheme();
-  const [isOpen, setIsOpen] = useState(true);
+interface WelcomeModalProps {
+  open: boolean;
+  onClose: () => void;
+}
 
+const WelcomeModal: React.FC<WelcomeModalProps> = ({ open, onClose }) => {
+  const { accent } = useAppTheme();
+  const reduceMotion = useReducedMotion();
 
-  // Add overflow hidden to body when modal is open to prevent scrolling
+  // Lock page scroll and allow Escape to dismiss while the modal is open
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-  }, [isOpen]);
-
-  const handleClose = () => {
-    setIsOpen(false);
-  };
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open, onClose]);
 
   return (
     <AnimatePresence>
-      {isOpen && (
+      {open && (
         <Backdrop
-          open={isOpen}
+          open={open}
+          onClick={onClose}
           sx={{
-            zIndex: (theme) => theme.zIndex.drawer + 9999,
-            // Deep blur effect on everything behind the modal
+            zIndex: (theme) => theme.zIndex.modal + 10,
             backdropFilter: "blur(12px)",
-            backgroundColor: mode === 'light' ? "rgba(255, 255, 255, 0.8)" : "rgba(5, 5, 10, 0.75)",
+            backgroundColor: accent.backdrop,
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -43,12 +50,11 @@ const WelcomeModal: React.FC = () => {
             initial={{ y: "-100vh", opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0, transition: { duration: 0.4 } }}
-            transition={{
-              type: "spring",
-              damping: 20,
-              stiffness: 100,
-              delay: 0.2,
-            }}
+            transition={{ type: "spring", damping: 20, stiffness: 100, delay: 0.2 }}
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="welcome-title"
           >
             <Box
               className="glass-box"
@@ -60,108 +66,72 @@ const WelcomeModal: React.FC = () => {
                 flexDirection: "column",
                 alignItems: "center",
                 textAlign: "center",
-                border: `1px solid ${mode === 'light' ? "rgba(30, 64, 175, 0.15)" : "rgba(0, 242, 254, 0.3)"}`,
-                boxShadow: mode === 'light' ? "0 20px 80px rgba(0,0,0,0.08)" : "0 20px 80px rgba(0,242,254,0.15)",
-                borderRadius: 4,
+                border: `1px solid ${accent.border}`,
+                boxShadow: `0 20px 80px ${accent.glow}`,
+                borderRadius: 0,
               }}
             >
-              {/* Animated 3D Waving Hand Emoji */}
-              <motion.img
-                src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Hand%20gestures/Waving%20Hand.png"
-                alt="Waving Hand"
-                animate={{ rotate: [0, 14, -8, 14, -4, 10, 0, 0] }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 2.5,
-                  ease: "easeInOut",
-                }}
-                style={{
-                  width: "120px",
-                  height: "120px",
-                  marginBottom: "1rem",
-                  filter: `drop-shadow(0 10px 20px ${mode === 'light' ? "rgba(30, 64, 175, 0.2)" : "rgba(0, 242, 254, 0.3)"})`,
-                }}
-              />
+              <motion.span
+                aria-hidden="true"
+                animate={reduceMotion ? undefined : { rotate: [0, 14, -8, 14, -4, 10, 0, 0] }}
+                transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
+                style={{ fontSize: "96px", lineHeight: 1, marginBottom: "1rem", display: "inline-block", transformOrigin: "70% 70%" }}
+              >
+                👋
+              </motion.span>
 
               <Typography
+                id="welcome-title"
                 variant="h3"
+                component="h2"
                 sx={{
-                  fontWeight: 800,
                   color: "text.primary",
                   mb: 3,
                   minHeight: "80px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontFamily: '"Niconne", cursive',
+                  fontFamily: '"Tangerine", cursive',
+                  fontWeight: 700,
+                  fontSize: { xs: "3.2rem", md: "4.2rem" },
                 }}
               >
-                <Typewriter
-                  words={["Welcome to My Profile!"]}
-                  loop={1}
-                  cursor
-                  cursorStyle="_"
-                  typeSpeed={70}
-                  delaySpeed={1000}
-                />
+                <TypewriterText text="Welcome to My Profile!" startDelay={600} typeSpeed={70} />
               </Typography>
 
-              <Typography
-                variant="body1"
+              <Typography variant="body1" sx={{ color: "text.secondary", mb: 5, fontSize: "1.2rem", lineHeight: 1.6 }}>
+                I'm Ankit, a Full Stack Developer with {yearsOfExperience}+ years of experience building digital products.
+                Ready to explore my journey?
+              </Typography>
+
+              <Button
+                variant="outlined"
+                size="large"
+                onClick={onClose}
+                endIcon={<ArrowForwardIcon />}
                 sx={{
-                  color: "text.secondary",
-                  mb: 5,
+                  px: 4,
+                  py: 1.5,
                   fontSize: "1.2rem",
-                  lineHeight: 1.6,
-                }}
-              >
-                I'm Ankit, a Senior Full Stack Developer shaping the future of
-                digital products. Ready to explore my journey?
-              </Typography>
-
-              <Box
-                sx={{
-                  display: "flex",
-                  gap: { xs: 2, md: 3 },
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexWrap: "wrap",
-                  mt: 2,
-                }}
-              >
-                <Button
-                  variant="outlined"
-                  size="large"
-                  onClick={handleClose}
-                  endIcon={<CelebrationIcon />}
-                  sx={{
-                    px: 4,
-                    py: 1.5,
-                    fontSize: "1.2rem",
-                    fontWeight: "bold",
-                    borderColor: "primary.main",
-                    color: "primary.main",
+                  fontWeight: "bold",
+                  borderColor: "primary.main",
+                  color: "primary.main",
+                  borderWidth: 2,
+                  borderRadius: 0,
+                  textTransform: "none",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
                     borderWidth: 2,
-                    borderRadius: "24px", // This creates the rounded-lg effect
-                    textTransform: "none",
-                    transition: "all 0.3s ease",
-                    "&:hover": {
-                      borderWidth: 2,
-                      borderColor: "transparent",
-                      background: mode === 'light'
-                        ? "linear-gradient(90deg, #1e40af 0%, #3b82f6 100%)"
-                        : "linear-gradient(90deg, #00f2fe 0%, #4facfe 100%)",
-                      color: mode === 'light' ? "#fff" : "#000",
-                      transform: "translateY(-3px)",
-                      boxShadow: mode === 'light' 
-                        ? "0 12px 30px rgba(30, 64, 175, 0.4)" 
-                        : "0 12px 30px rgba(0, 242, 254, 0.6)",
-                    },
-                  }}
-                >
-                  Yes, I am impressed with your profile
-                </Button>
-              </Box>
+                    borderColor: "transparent",
+                    background: accent.gradient,
+                    color: accent.contrastText,
+                    transform: "translateY(-3px)",
+                    boxShadow: `0 12px 30px ${accent.glowStrong}`,
+                  },
+                }}
+              >
+                Explore My Profile
+              </Button>
             </Box>
           </motion.div>
         </Backdrop>
